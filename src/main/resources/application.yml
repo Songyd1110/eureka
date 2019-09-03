@@ -1,0 +1,24 @@
+spring:
+  application:
+    name: server-eureka
+  jackson:
+    date-format: yyyy-MM-dd HH:mm:ss
+    time-zone: GMT+8
+    serialization:
+      FAIL_ON_EMPTY_BEANS: false
+server:
+  port: 8761
+eureka:
+  instance:
+    instance-id: 192.168.159.254:${spring.application.name}:${server.port}
+    prefer-ip-address: true
+    #hostname: ${spring.cloud.client.ipAddress}
+    #ip-address: $HOST_IP
+  server:
+    enable-self-preservation: false           # 关闭自我保护模式（缺省为打开）
+    use-read-only-response-cache: false
+    eviction-interval-timer-in-ms: 3000       # 续期时间，即扫描失效服务的间隔时间（缺省为60*1000ms）
+  client:
+    register-with-eureka: true
+    fetch-registry: true
+    instanceInfoReplicationIntervalSeconds: 5   #更新实例信息的变化到Eureka服务端的间隔时间，单位为秒
